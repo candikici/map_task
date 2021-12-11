@@ -1,4 +1,4 @@
-package com.example.map_task
+package com.candikici.mapTask
 
 import io.flutter.embedding.android.FlutterActivity
 
