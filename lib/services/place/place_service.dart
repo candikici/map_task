@@ -9,11 +9,9 @@ class PlaceService extends IPlaceService {
   Future findPlaces(String searchKey) async {
     try {
       var response = await place.search.getTextSearch(searchKey);
-
       return response;
     } catch (e) {
-      print(e);
-      return "Bir hata oluştu.";
+      return "There is an error.";
     }
   }
 

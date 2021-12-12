@@ -21,8 +21,7 @@ class MapService extends IMapService {
       );
       return [position, marker];
     } catch (e) {
-      print(e);
-      return "Bir hata oluştu.";
+      return e.toString();
     }
   }
 }

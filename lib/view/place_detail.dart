@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_place/google_place.dart';
-import 'package:map_task/components/carousel_slider.dart';
-import 'package:map_task/viewmodel/app_viewmodel.dart';
 import 'package:provider/provider.dart';
+
+import '../components/carousel_slider.dart';
+import '../components/detail_cmp.dart';
+import '../components/main_components.dart';
+import '../viewmodel/app_viewmodel.dart';
 
 class Detail extends StatefulWidget {
   const Detail({Key? key, required this.place}) : super(key: key);
@@ -13,9 +16,7 @@ class Detail extends StatefulWidget {
 
 class _DetailState extends State<Detail> {
   List<Widget> imageList = [];
-
   var isLoading = false;
-
   changeLoading() => setState(() => isLoading = !isLoading);
 
   initialize() async {
@@ -39,30 +40,27 @@ class _DetailState extends State<Detail> {
   @override
   void initState() {
     initialize();
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: buildAppBar(title: widget.place.name ?? ""),
       body: Consumer<AppViewModel>(
-        builder: (context, app, child) => Column(
-          children: [
-            imageList.isEmpty
-                ? const SizedBox(
-                    height: 205,
-                    child: Center(child: Text("Fotoğraf Bulunamadı.")),
-                  )
-                : buildCarouselSlider(app, imageList, context),
-            Text(widget.place.name ?? "not informed"),
-            Text(widget.place.formattedAddress ?? "not informed"),
-            Text(widget.place.businessStatus ?? "not informed"),
-            Text(widget.place.rating?.toString() ?? "not informed"),
-            Text(widget.place.userRatingsTotal?.toString() ?? "not informed"),
-          ],
-        ),
+        builder: (context, app, child) => isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : Padding(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+                child: SingleChildScrollView(
+                  child: buildDetailColumn(
+                    app,
+                    context,
+                    widget.place,
+                    imageList,
+                  ),
+                ),
+              ),
       ),
     );
   }

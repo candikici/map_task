@@ -25,6 +25,13 @@ class AppViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  clearAllResults() {
+    placeResults == null;
+    locationData = null;
+    searchKey = null;
+    notifyListeners();
+  }
+
   setImageIndex(int i, [bool isListening = true]) {
     currentPhotoIndex = i;
     if (isListening) notifyListeners();

@@ -17,3 +17,10 @@ Route createRoute(Widget page) {
     },
   );
 }
+
+void pushNewPage({required BuildContext context, required Widget page}) {
+  Navigator.push(
+    context,
+    createRoute(page),
+  );
+}

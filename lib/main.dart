@@ -34,6 +34,8 @@ class MapChallengeApp extends StatelessWidget {
           iconTheme: const IconThemeData(
             color: Colors.white,
           ),
+          progressIndicatorTheme:
+              const ProgressIndicatorThemeData(color: AppContants.BLUE),
           inputDecorationTheme: const InputDecorationTheme(
             labelStyle: AppContants.W600S14TG,
             hintStyle: AppContants.W600S14TG,
